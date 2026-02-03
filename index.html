@@ -2,196 +2,192 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>💘 Valentine Surprise for Rebecca 💘</title>
+  <title>Valentine Surprise</title>
 
   <style>
     body {
-      font-family: "Comic Sans MS", cursive, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
       background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-      overflow: hidden;
       margin: 0;
       height: 100vh;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-    }
-
-    h1, h2, p {
-      color: #fff;
-      text-shadow: 2px 2px #ff4d6d;
+      color: white;
       text-align: center;
     }
 
+    /* Logo */
+    .logo {
+      font-size: 42px;
+      font-weight: 900;
+      letter-spacing: 6px;
+      margin-bottom: 30px;
+    }
+
+    h1 {
+      font-size: 56px;
+      margin: 10px 0 30px;
+    }
+
+    h2 {
+      font-size: 28px;
+      margin-bottom: 40px;
+      font-weight: normal;
+    }
+
     .buttons {
-      position: relative;
-      height: 200px;
-      width: 100%;
       display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 30px;
+      gap: 40px;
+      position: relative;
     }
 
     button {
-      font-size: 20px;
-      padding: 14px 30px;
-      border-radius: 12px;
+      font-size: 28px;
+      padding: 18px 48px;
+      border-radius: 14px;
       border: none;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: transform 0.2s ease;
     }
 
     #yes {
       background-color: #ff4d6d;
       color: white;
-      box-shadow: 0 0 15px rgba(255, 77, 109, 0.8);
+      font-weight: bold;
     }
 
     #no {
-      background-color: #444;
+      background-color: #555;
       color: white;
-      position: absolute;
-    }
-
-    .heart {
-      position: absolute;
-      font-size: 18px;
-      animation: floatUp 6s linear infinite, pulse 1.2s ease-in-out infinite;
-      opacity: 0.8;
-    }
-
-    @keyframes floatUp {
-      from { transform: translateY(100vh); }
-      to { transform: translateY(-10vh); }
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.3); }
+      position: relative;
     }
 
     .itinerary {
-      margin-top: 20px;
-      font-size: 18px;
-      max-width: 600px;
+      max-width: 720px;
+      font-size: 22px;
+      line-height: 1.6;
+      margin-top: 40px;
     }
 
-    .again {
-      margin-top: 20px;
-      background: #fff;
-      color: #ff4d6d;
-      font-weight: bold;
+    /* Confetti */
+    .confetti {
+      position: fixed;
+      top: -10px;
+      width: 10px;
+      height: 10px;
+      background-color: white;
+      animation: fall 3s linear forwards;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
     }
   </style>
 </head>
 
 <body>
-  <img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" width="160" />
 
-  <h1>Hey <span id="name">Rebecca</span> 💕</h1>
-  <h2>Will you be my Valentine?</h2>
+  <div class="logo">RPRP</div>
+
+  <h1>Will you be my Valentine?</h1>
+  <h2>Rebecca · Becky · Becks · Becca · Rebe · Mini · Tiny · Prechocha</h2>
 
   <div class="buttons">
-    <button id="yes">YES 💖</button>
-    <button id="no">No 🙃</button>
+    <button id="yes">YES</button>
+    <button id="no">NO</button>
   </div>
 
   <div id="schedule" class="itinerary"></div>
 
-  <!-- Juan Gabriel -->
+  <!-- Music -->
   <audio id="song" loop>
     <source src="https://archive.org/download/JuanGabrielQuerida/Juan%20Gabriel%20-%20Querida.mp3" type="audio/mpeg">
   </audio>
 
   <script>
-    const names = ["Rebecca", "Becky", "Becks", "Becca", "Rebe", "Mini", "Tiny", "Prechocha 💕"];
-    let nameIndex = 0;
-    let yesSize = 1;
-
-    const nameEl = document.getElementById("name");
     const yesBtn = document.getElementById("yes");
     const noBtn = document.getElementById("no");
     const schedule = document.getElementById("schedule");
     const song = document.getElementById("song");
 
-    // Rotate nicknames
-    setInterval(() => {
-      nameIndex = (nameIndex + 1) % names.length;
-      nameEl.textContent = names[nameIndex];
-    }, 1200);
-
-    // No button dodges
+    // Keep NO inside screen
     noBtn.addEventListener("mouseover", () => {
-      const x = Math.random() * (window.innerWidth - 120);
-      const y = Math.random() * (window.innerHeight - 60);
+      const padding = 20;
+      const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+      const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      noBtn.style.position = "fixed";
       noBtn.style.left = `${x}px`;
       noBtn.style.top = `${y}px`;
-      yesSize += 0.1;
-      yesBtn.style.transform = `scale(${yesSize})`;
+
+      yesBtn.style.transform = "scale(1.08)";
     });
+
+    // Confetti effect
+    function confetti() {
+      for (let i = 0; i < 120; i++) {
+        const c = document.createElement("div");
+        c.className = "confetti";
+        c.style.left = Math.random() * window.innerWidth + "px";
+        c.style.backgroundColor = ["#fff", "#ff4d6d", "#ffd1dc"][Math.floor(Math.random()*3)];
+        c.style.animationDuration = 2 + Math.random() * 2 + "s";
+        document.body.appendChild(c);
+        setTimeout(() => c.remove(), 4000);
+      }
+    }
 
     // Fade-in music
     function fadeInMusic() {
       song.volume = 0;
       song.play();
-      let vol = 0;
+      let v = 0;
       const fade = setInterval(() => {
-        if (vol < 0.35) {
-          vol += 0.02;
-          song.volume = vol;
+        if (v < 0.35) {
+          v += 0.02;
+          song.volume = v;
         } else {
           clearInterval(fade);
         }
       }, 200);
     }
 
-    // YES click
     yesBtn.addEventListener("click", () => {
-      document.body.style.overflow = "auto";
+      confetti();
       fadeInMusic();
 
       schedule.innerHTML = `
-        <h1>💘 Our Valentine’s Day 💘</h1>
+        <h1>Perfect.</h1>
 
-        <p>🕣 <strong>8:30 AM</strong><br>
-        Atlanta Mission 5K – Pemberton Place<br>
-        126 Ivan Allen Jr Blvd NW, Atlanta, GA 30308</p>
+        <p>
+          I would love to formally invite you to spend Valentine’s Day together —
+          a full day intentionally planned to celebrate us, have fun, and make memories.
+        </p>
 
-        <p>🕛 <strong>12:00 PM</strong><br>
-        🎁 A surprise just for you, mi amor</p>
+        <p><strong>8:30 AM</strong> — Atlanta Mission 5K<br>
+        Pemberton Place · 126 Ivan Allen Jr Blvd NW, Atlanta</p>
 
-        <p>🥩 <strong>4:30 PM</strong><br>
-        The Crossing Steakhouse<br>
-        40 South Peachtree St, Norcross, GA 30071</p>
+        <p><strong>12:00 PM</strong> — A surprise just for you</p>
 
-        <p>🥅 <strong>7:10 PM</strong><br>
-        Atlanta Gladiators vs Adirondack Thunder<br>
-        Gas South Arena<br>
-        6400 Sugarloaf Pkwy, Duluth, GA 30097</p>
+        <p><strong>4:30 PM</strong> — The Crossing Steakhouse<br>
+        40 South Peachtree St, Norcross</p>
 
-        <p>💃 <strong>11:00 PM – 3:00 AM</strong><br>
-        <strong>Candela Night</strong> 🔥<br>
-        269 Armour Dr NE, Atlanta, GA 30324</p>
+        <p><strong>7:10 PM</strong> — Atlanta Gladiators vs Adirondack<br>
+        Gas South Arena · Duluth</p>
 
-        <h2>Querida… gracias por ser mi Valentine ❤️</h2>
-
-        <button class="again" onclick="alert('Still yes 😌❤️')">
-          I already said yes 🙄❤️
-        </button>
+        <p><strong>11:00 PM – 3:00 AM</strong> — Candela Night<br>
+        269 Armour Dr NE, Atlanta</p>
       `;
     });
-
-    // Floating hearts
-    setInterval(() => {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.textContent = "💖";
-      heart.style.left = Math.random() * window.innerWidth + "px";
-      heart.style.fontSize = Math.random() * 20 + 12 + "px";
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 6000);
-    }, 300);
   </script>
+
 </body>
 </html>
