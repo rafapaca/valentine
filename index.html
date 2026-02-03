@@ -3,93 +3,80 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A Formal Invitation</title>
+  <title>A Special Invitation</title>
   
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --burgundy: #800020;
-      --gold: #b8860b;
-      --cream: #fffdf5;
+      --hot-pink: #ff4d6d;
+      --soft-pink: #ffccd5;
+      --dark-pink: #c9184a;
+      --white: #fff0f3;
     }
 
     body {
-      background-color: #2b0505; /* Deep dark background to make the card pop */
-      background-image: url('https://www.transparenttextures.com/patterns/black-linen.png');
+      background: linear-gradient(135deg, #ffafbd, #ffc3a0);
       margin: 0;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 60px 20px;
-      font-family: 'Playfair Display', serif;
+      padding: 40px 20px;
+      font-family: 'Montserrat', sans-serif;
+      overflow-y: auto;
     }
 
+    /* Top Countdown */
     #countdown {
-      color: var(--gold);
-      font-family: 'Cinzel', serif;
-      letter-spacing: 3px;
-      font-size: 16px;
-      margin-bottom: 30px;
-      text-align: center;
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(5px);
+      padding: 12px 25px;
+      border-radius: 50px;
+      color: var(--dark-pink);
+      font-weight: bold;
+      margin-bottom: 25px;
+      border: 2px solid white;
+      font-size: 18px;
     }
 
-    /* The Physical Card */
+    /* The Card Container */
     .card {
-      background-color: var(--cream);
-      max-width: 650px;
+      background: white;
+      max-width: 600px;
       width: 100%;
-      padding: 60px;
-      position: relative;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-      border: 2px solid var(--gold);
-      box-sizing: border-box;
+      padding: 50px 40px;
+      border-radius: 30px;
+      box-shadow: 0 15px 35px rgba(255, 77, 109, 0.3);
+      border: 8px solid var(--soft-pink);
       text-align: center;
-    }
-
-    /* Ornate Borders */
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 15px; left: 15px; right: 15px; bottom: 15px;
-      border: 1px solid var(--burgundy);
-      pointer-events: none;
-    }
-
-    .card::after {
-      content: '❦'; /* Floral ornament */
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      color: var(--gold);
-      font-size: 24px;
+      position: relative;
+      box-sizing: border-box;
     }
 
     .logo {
-      font-family: 'Cinzel', serif;
+      font-family: 'Pacifico', cursive;
+      color: var(--hot-pink);
       font-size: 28px;
-      color: var(--burgundy);
-      border-bottom: 1px solid var(--gold);
-      display: inline-block;
-      margin-bottom: 40px;
-      padding: 0 20px;
+      margin-bottom: 20px;
     }
 
     h1 {
-      font-family: 'Great Vibes', cursive;
-      font-size: 64px;
-      color: var(--burgundy);
-      margin: 20px 0;
-      line-height: 1.2;
+      font-family: 'Dancing Script', cursive;
+      font-size: 52px;
+      color: var(--dark-pink);
+      margin: 10px 0;
+      min-height: 140px; /* Space for cycling names */
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    #invite-text {
-      font-size: 28px;
-      color: #333;
+    .invite-msg {
+      font-size: 24px;
+      color: #555;
       margin-bottom: 40px;
-      font-style: italic;
+      line-height: 1.4;
     }
 
     .buttons {
@@ -97,161 +84,145 @@
       flex-direction: column;
       align-items: center;
       gap: 20px;
-      margin-top: 20px;
     }
 
     button {
-      font-family: 'Cinzel', serif;
-      font-size: 22px;
-      padding: 15px 50px;
+      font-size: 26px;
+      padding: 18px 60px;
+      border-radius: 50px;
+      border: none;
       cursor: pointer;
       transition: all 0.3s ease;
-      letter-spacing: 2px;
-      border: 1px solid var(--gold);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: bold;
     }
 
     #yes {
-      background-color: var(--burgundy);
+      background-color: var(--hot-pink);
       color: white;
+      box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
     }
 
     #no {
-      background: transparent;
-      color: var(--burgundy);
-      border: none;
-      font-size: 16px;
-      text-decoration: underline;
+      background-color: #eee;
+      color: #888;
+      font-size: 18px;
     }
 
-    /* Itinerary Section */
+    /* Itinerary Styling */
     .itinerary {
       display: none;
       text-align: left;
-      animation: fadeIn 2s ease;
+      animation: fadeIn 1s ease-in;
     }
 
     .itinerary h2 {
-      font-family: 'Great Vibes', cursive;
-      font-size: 72px;
-      color: var(--burgundy);
+      font-family: 'Dancing Script', cursive;
+      font-size: 60px;
+      color: var(--hot-pink);
       text-align: center;
-      margin: 0 0 20px 0;
+      margin-bottom: 10px;
     }
 
     .itinerary-intro {
-      font-size: 24px;
+      font-size: 22px;
       text-align: center;
+      color: #666;
       margin-bottom: 40px;
-      color: #444;
-      line-height: 1.5;
     }
 
     .event {
       margin-bottom: 35px;
-      padding-left: 20px;
-      border-left: 2px solid var(--gold);
+      padding: 20px;
+      border-radius: 20px;
+      background: var(--white);
+      border-left: 6px solid var(--hot-pink);
     }
 
-    .time {
-      font-family: 'Cinzel', serif;
+    .event-time {
       font-weight: bold;
-      color: var(--gold);
-      font-size: 18px;
+      color: var(--dark-pink);
+      font-size: 20px;
       display: block;
+      margin-bottom: 5px;
     }
 
-    .title {
+    .event-title {
       font-size: 26px;
-      font-weight: bold;
-      color: var(--burgundy);
+      font-weight: 900;
+      color: #333;
       display: block;
-      margin: 5px 0;
     }
 
-    .desc {
+    .event-desc {
       font-size: 20px;
       color: #555;
+      margin-top: 10px;
       display: block;
-      line-height: 1.4;
-    }
-
-    .location {
-      font-size: 16px;
-      color: #888;
-      font-style: italic;
-      margin-top: 5px;
-      display: block;
+      line-height: 1.5;
     }
 
     .cat-gif {
-      width: 140px;
+      width: 150px;
       display: block;
-      margin: 0 auto 30px;
+      margin: 0 auto 20px;
+      border-radius: 20px;
     }
 
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-    @media (max-width: 600px) {
-      .card { padding: 30px; }
-      h1 { font-size: 48px; }
-      .title { font-size: 22px; }
-    }
   </style>
 </head>
 <body>
 
-  <div id="countdown">Loading Valentine's Clock...</div>
+  <div id="countdown">Countdown to Feb 14th...</div>
 
   <div class="card">
     <div class="logo">RPRP</div>
 
     <div id="ask-section">
-      <h1>Dearest <span id="nickname-span">Rebecca</span>,</h1>
-      <p id="invite-text">Would you do me the distinct honor of being my Valentine?</p>
+      <h1 id="headline">Rebecca, will you be my valentine?</h1>
+      <p class="invite-msg">I would like to invite you to a day full of fun on Feb 14th.</p>
       
       <div class="buttons">
-        <button id="yes">I Accept</button>
-        <button id="no">I Decline</button>
+        <button id="yes">YES! ❤️</button>
+        <button id="no">No</button>
       </div>
     </div>
 
     <div id="itinerary-section" class="itinerary">
-      <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJueGZueGZueGZueGZueGZueGZueGZueGZueGZueGZueGZueGZueCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oriO0OEd9QIDdllqo/giphy.gif" class="cat-gif" alt="Cute Cat">
+      <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJueGZueGZueGZueGZueGZueGZueGZueGZueGZueGZueGZueGZueCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oriO0OEd9QIDdllqo/giphy.gif" class="cat-gif" alt="Cute Tiny Cat">
       <h2>Perfect.</h2>
-      <p class="itinerary-intro">I would like to invite you to a day full of fun on February 14th, 2026.</p>
+      <p class="itinerary-intro">Here is what I have planned for our day:</p>
 
       <div class="event">
-        <span class="time">8:30 AM</span>
-        <span class="title">Atlanta Mission 5K Race</span>
-        <span class="desc">Starting off right with a morning run for a good cause at Pemberton Place.</span>
-        <span class="location">126 Ivan Allen Jr Blvd NW, Atlanta</span>
+        <span class="event-time">8:30 AM</span>
+        <span class="event-title">Atlanta Mission 5K Race</span>
+        <span class="event-desc">Starting off right with a refreshing morning run together at Pemberton Place.</span>
       </div>
 
-      <div class="event" style="background: #fdf2f4; padding: 20px; border: 1px dashed var(--gold);">
-        <span class="time">12:00 PM</span>
-        <span class="title">A Special Surprise</span>
-        <span class="desc">A special moment just for you... stay tuned to see what's in store.</span>
-      </div>
-
-      <div class="event">
-        <span class="time">4:30 PM</span>
-        <span class="title">Dinner at The Crossing Steakhouse</span>
-        <span class="desc">An elegant early dinner in the heart of historic Norcross.</span>
-        <span class="location">40 South Peachtree St, Norcross, GA</span>
+      <div class="event" style="background: #fff5f7; border-color: #ff8fa3;">
+        <span class="event-time">12:00 PM</span>
+        <span class="event-title">✨ The Noon Surprise ✨</span>
+        <span class="event-desc">A special moment just for you... stay tuned to see what's in store!</span>
       </div>
 
       <div class="event">
-        <span class="time">7:10 PM</span>
-        <span class="title">Atlanta Gladiators vs Adirondack</span>
-        <span class="desc">Cheering on the home team for some exciting hockey action at the arena.</span>
-        <span class="location">Gas South Arena, Duluth</span>
+        <span class="event-time">4:30 PM</span>
+        <span class="event-title">Dinner at The Crossing Steakhouse</span>
+        <span class="event-desc">Enjoying an early dinner at this beautiful spot in historic Norcross.</span>
       </div>
 
       <div class="event">
-        <span class="time">11:00 PM</span>
-        <span class="title">Candela Night</span>
-        <span class="desc">Ending the night with music and dancing to celebrate us.</span>
-        <span class="location">District Atlanta · 269 Armour Dr NE</span>
+        <span class="event-time">7:10 PM</span>
+        <span class="event-title">Atlanta Gladiators vs Adirondack</span>
+        <span class="event-desc">Cheering loudly for the home team during some exciting hockey action!</span>
+      </div>
+
+      <div class="event">
+        <span class="event-time">11:00 PM</span>
+        <span class="event-title">Candela Night</span>
+        <span class="event-desc">Dancing the night away and celebrating us until the early morning.</span>
       </div>
     </div>
   </div>
@@ -261,50 +232,49 @@
   </audio>
 
   <script>
-    // Nickname Cycler inside the sentence
+    // Nickname Cycler
     const nicknames = ["Rebecca", "Becky", "Becks", "Becca", "Rebe", "Mini", "Tiny", "Prechocha"];
-    let nameIdx = 0;
-    const nameSpan = document.getElementById("nickname-span");
+    let nameIndex = 0;
+    const headline = document.getElementById("headline");
 
     setInterval(() => {
-      nameIdx = (nameIdx + 1) % nicknames.length;
-      nameSpan.style.opacity = 0;
-      setTimeout(() => {
-        nameSpan.innerText = nicknames[nameIdx];
-        nameSpan.style.opacity = 1;
-      }, 500);
-    }, 2500);
-    nameSpan.style.transition = "opacity 0.5s ease";
+      nameIndex = (nameIndex + 1) % nicknames.length;
+      headline.innerText = `${nicknames[nameIndex]}, will you be my valentine?`;
+    }, 2000);
 
-    // Countdown
-    function updateTimer() {
+    // Countdown Timer
+    function updateCountdown() {
       const target = new Date("February 14, 2026 00:00:00").getTime();
       const now = new Date().getTime();
       const diff = target - now;
-      const d = Math.floor(diff / (86400000));
-      const h = Math.floor((diff % 86400000) / 3600000);
-      const m = Math.floor((diff % 3600000) / 60000);
-      const s = Math.floor((diff % 60000) / 1000);
-      document.getElementById("countdown").innerText = `~ The Festivities Begin In: ${d}d ${h}h ${m}m ${s}s ~`;
-    }
-    setInterval(updateTimer, 1000);
-    updateTimer();
 
-    // Shrinking No Button
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById("countdown").innerText = `Our Valentine's starts in: ${d}d ${h}h ${m}m ${s}s`;
+    }
+    setInterval(updateCountdown, 1000);
+
+    // Shrinking No Button logic
     const noBtn = document.getElementById("no");
     const yesBtn = document.getElementById("yes");
     let noScale = 1;
+    let yesScale = 1;
 
     noBtn.addEventListener("mouseover", () => {
       noScale -= 0.15;
-      if (noScale < 0.2) {
-        noBtn.style.visibility = "hidden";
+      yesScale += 0.1;
+      if (noScale < 0.3) {
+        noBtn.style.display = "none";
       } else {
         noBtn.style.transform = `scale(${noScale})`;
+        yesBtn.style.transform = `scale(${yesScale})`;
       }
     });
 
-    // Reveal Itinerary
+    // YES button click logic
     yesBtn.addEventListener("click", () => {
       const song = document.getElementById("song");
       song.volume = 0.5;
@@ -313,7 +283,6 @@
       document.getElementById("ask-section").style.display = "none";
       document.getElementById("itinerary-section").style.display = "block";
       
-      // Smoothly scroll to the top of the card
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   </script>
