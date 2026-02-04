@@ -22,19 +22,19 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 40px 20px;
+      padding: 20px 15px;
       font-family: 'Montserrat', sans-serif;
       overflow-x: hidden;
     }
 
     .card {
       background: white;
-      max-width: 650px;
+      max-width: 500px; /* Slimmer for better mobile feel */
       width: 100%;
-      padding: 50px 40px;
-      border-radius: 40px;
-      box-shadow: 0 20px 50px rgba(255, 77, 109, 0.3);
-      border: 10px solid var(--soft-pink);
+      padding: 30px 20px;
+      border-radius: 30px;
+      box-shadow: 0 15px 40px rgba(255, 77, 109, 0.2);
+      border: 6px solid var(--soft-pink);
       text-align: center;
       box-sizing: border-box;
     }
@@ -42,27 +42,25 @@
     .logo {
       font-family: 'Pacifico', cursive;
       color: var(--hot-pink);
-      font-size: 28px;
-      margin-bottom: 10px;
+      font-size: 22px;
+      margin-bottom: 5px;
     }
 
     .itinerary-title {
-      font-family: 'Montserrat', sans-serif;
       font-weight: 900;
-      font-size: 24px;
+      font-size: 18px;
       color: #333;
       text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 5px;
+      letter-spacing: 1.5px;
     }
 
     /* Nickname Animation */
     #nickname-container {
       font-family: 'Dancing Script', cursive;
-      font-size: clamp(50px, 10vw, 80px);
+      font-size: 45px;
       color: var(--dark-pink);
       margin: 0;
-      height: 100px;
+      height: 60px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -73,93 +71,81 @@
     }
 
     @keyframes pop {
-      0% { transform: scale(0.8); opacity: 0; }
+      0% { transform: scale(0.9); opacity: 0; }
       100% { transform: scale(1); opacity: 1; }
     }
 
-    /* Large Countdown Styling */
+    /* Countdown Styling */
     #countdown-box {
       background: var(--dark-pink);
       color: white;
-      padding: 25px;
-      border-radius: 30px;
-      margin: 20px 0;
-      box-shadow: 0 10px 20px rgba(201, 24, 74, 0.2);
+      padding: 15px;
+      border-radius: 20px;
+      margin: 15px 0;
     }
 
     #countdown-text {
       font-weight: 900;
-      font-size: clamp(28px, 7vw, 42px);
-      letter-spacing: 1px;
+      font-size: 24px;
     }
 
     .countdown-label {
-      font-size: 12px;
+      font-size: 10px;
       text-transform: uppercase;
-      letter-spacing: 3px;
+      letter-spacing: 2px;
       display: block;
-      margin-bottom: 8px;
+      margin-bottom: 5px;
       font-weight: 700;
-      opacity: 0.9;
     }
 
     .thank-you {
-      font-size: 20px;
-      color: #555;
-      font-weight: 700;
-      margin-bottom: 30px;
+      font-size: 14px;
+      color: #666;
+      font-weight: 600;
+      margin-bottom: 20px;
       font-style: italic;
     }
 
-    .itinerary h2 {
+    .date-header {
       font-family: 'Dancing Script', cursive;
-      font-size: 60px;
+      font-size: 32px;
       color: var(--hot-pink);
-      margin: 0;
+      margin: 20px 0;
+      font-weight: 700;
     }
 
-    .itinerary-intro {
-      font-size: 18px;
-      color: #444;
-      margin: 10px 0 30px;
-    }
-
+    /* Compact Itinerary */
     .event {
       text-align: left;
-      margin-bottom: 25px;
-      padding: 25px;
-      border-radius: 25px;
+      margin-bottom: 15px;
+      padding: 15px;
+      border-radius: 15px;
       background: var(--white);
-      border-left: 8px solid var(--hot-pink);
+      border-left: 5px solid var(--hot-pink);
     }
 
     .event-time {
       font-weight: 900;
       color: var(--dark-pink);
-      font-size: 20px;
+      font-size: 14px;
       display: block;
     }
 
     .event-title {
-      font-size: 24px;
+      font-size: 18px;
       font-weight: 900;
       color: #222;
       display: block;
-      margin: 5px 0;
+      margin: 2px 0;
     }
 
     .event-desc {
-      font-size: 17px;
+      font-size: 14px;
       color: #555;
-      line-height: 1.5;
+      line-height: 1.4;
     }
 
-    .cat-gif {
-      width: 160px;
-      display: block;
-      margin: 0 auto 20px;
-      border-radius: 20px;
-    }
+    audio { display: none; }
   </style>
 </head>
 <body>
@@ -174,44 +160,41 @@
     <div class="thank-you">Thank you for accepting my invitation! ❤️</div>
 
     <div id="countdown-box">
-        <span class="countdown-label">Counting down to our day...</span>
+        <span class="countdown-label">Counting down...</span>
         <div id="countdown-text">Loading...</div>
     </div>
 
     <div class="itinerary">
-      <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJueGZueGZueGZueGZueGZueGZueGZueGZueGZueGZueGZueGZueCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oriO0OEd9QIDdllqo/giphy.gif" class="cat-gif" alt="Cute Cat">
-      
-      <h2>The Plan</h2>
-      <p class="itinerary-intro">February 14, 2026</p>
+      <div class="date-header">February 14, 2026</div>
 
       <div class="event">
         <span class="event-time">8:30 AM</span>
         <span class="event-title">Atlanta Mission 5K Race</span>
-        <span class="event-desc">Starting off right with a morning run for a good cause at Pemberton Place.</span>
+        <span class="event-desc">Morning run for a good cause at Pemberton Place.</span>
       </div>
 
       <div class="event" style="background: #fff5f7; border-color: #ff8fa3; border-style: dashed;">
         <span class="event-time">TBD</span>
-        <span class="event-title">Head 2 Toe Massage Sandy Springs</span>
-        <span class="event-desc">A relaxing session... stay tuned for the specific time!</span>
+        <span class="event-title">Massage Therapy</span>
+        <span class="event-desc">Sandy Springs. Stay tuned for time!</span>
       </div>
 
       <div class="event">
         <span class="event-time">4:30 PM</span>
-        <span class="event-title">Early Dinner at The Crossing</span>
-        <span class="event-desc">Enjoying a delicious steakhouse dinner in historic Norcross.</span>
+        <span class="event-title">Dinner at The Crossing</span>
+        <span class="event-desc">Steakhouse dinner in historic Norcross.</span>
       </div>
 
       <div class="event">
         <span class="event-time">7:10 PM</span>
         <span class="event-title">Gladiators Hockey Night</span>
-        <span class="event-desc">Cheering on the Atlanta Gladiators vs Adirondack at the arena!</span>
+        <span class="event-desc">Cheering on the Atlanta Gladiators vs Adirondack!</span>
       </div>
 
       <div class="event">
         <span class="event-time">11:00 PM</span>
         <span class="event-title">Candela Night</span>
-        <span class="event-desc">Dancing and music to end our perfect Valentine's day together.</span>
+        <span class="event-desc">Dancing and music to end our perfect day.</span>
       </div>
     </div>
   </div>
@@ -225,7 +208,6 @@
     let nameIdx = 0;
     const nameDiv = document.getElementById("nickname-container");
 
-    // Nickname cycling
     setInterval(() => {
       nameIdx = (nameIdx + 1) % nicknames.length;
       nameDiv.classList.remove("name-pop");
@@ -234,7 +216,6 @@
       nameDiv.classList.add("name-pop");
     }, 2000);
 
-    // Countdown Logic
     function updateCountdown() {
       const target = new Date("February 14, 2026 00:00:00").getTime();
       const now = new Date().getTime();
@@ -256,12 +237,9 @@
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // Interaction to start audio if browser blocks autoplay
     document.body.addEventListener('click', function() {
         const audio = document.getElementById('song');
-        if (audio.paused) {
-            audio.play();
-        }
+        if (audio.paused) { audio.play(); }
     }, { once: true });
   </script>
 </body>
